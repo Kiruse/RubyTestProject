@@ -1,0 +1,15 @@
+<h1>Ticket</h1>
+<table>
+	<tr>
+		<td>Barcode:</td>
+		<td><%= @Ticket[:barcode].upcase %></td>
+	</tr>
+	<tr>
+		<td>Issued:</td>
+		<td><%= @Ticket[:created_at] %></td>
+	</tr>
+	<tr>
+		<td>Redeemed:</td>
+		<td><%= @Ticket[:redeemed] != nil ? 'yes' : 'no' %></td>
+	</tr>
+</table>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  uid: 
+  barcode: MyString
+  dispensed: 2017-07-23
+  redeemed: 2017-07-23
+
+two:
+  uid: 
+  barcode: MyString
+  dispensed: 2017-07-23
+  redeemed: 2017-07-23
