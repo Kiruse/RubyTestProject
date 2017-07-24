@@ -10,6 +10,11 @@ class Ticket < ApplicationRecord
 		self.price ||= self.new_record?? 2 : Api::PaymentsHelper.calculate_price(self.created_at.to_datetime, DateTime.now)
 	end
 	
+	def may_leave?
+		# 24 * 4 = 96 quarter hours per day
+		self[:redeemed] && ((DateTime.now - self[:redeemed].to_datetime) * 96) <= 1
+	end
+	
 	def to_param
 		self[:barcode].upcase
 	end

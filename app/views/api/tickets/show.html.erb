@@ -16,7 +16,11 @@
 		<td>Price:</td>
 		<td><%= @ticket[:price] || Float::NAN %>&euro;</td>
 	</tr>
-	<% unless @ticket[:redeemed] %>
+	<tr>
+		<td>May leave:</td>
+		<td><%= @ticket.may_leave?? 'yes' : 'no' %></td>
+	</tr>
+	<% unless @ticket.may_leave? %>
 	<tr>
 		<td colspan="2">
 			<%= link_to 'Pay', new_api_ticket_payment_path(ticket_barcode: @ticket[:barcode].upcase) %>
