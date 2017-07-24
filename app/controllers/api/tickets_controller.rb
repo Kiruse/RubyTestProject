@@ -32,10 +32,7 @@ module Api
       @ticket = Ticket.find(params[:barcode])
       
       # Ensure the ticket exists
-      if !@ticket
-        head :not_found
-        return
-      end
+      head :not_found and return unless @ticket
       
       # If the ticket has not yet been paid, calculate and display the due price instead
       if !@ticket[:redeemed]
