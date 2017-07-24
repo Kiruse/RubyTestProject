@@ -22,4 +22,8 @@ class Ticket < ApplicationRecord
 	def self.find(barcode)
 		Ticket.where(barcode: barcode.downcase).order(created_at: :desc).limit(1).first
 	end
+	
+	def self.active
+		Ticket.where(redeemed: nil)
+	end
 end
