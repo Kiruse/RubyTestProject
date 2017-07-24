@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+	
 	namespace :api do
-		get '/api/ticket/:barcode/may_leave', to: 'tickets#may_leave'
+		get '/free-spaces', to: 'tickets#free_spaces'
 		
 		resources :tickets, only: [:index, :create, :new, :show], param: :barcode do
 			resource :payment, only: [:new, :create]

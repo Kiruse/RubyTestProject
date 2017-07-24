@@ -9,10 +9,13 @@ module Api
       @max_tickets = MAX_TICKETS
       
       # Count the currently active tickets
-      @active_tickets = Ticket.where(redeemed: nil).count
+      @active_tickets = Ticket.active.count
     end
     
     def create
+      # Prevent requesting a new ticket if no more free spaces
+      head :forbidden and return if Ticket.active.count <= 0
+      
       # Create new, unpaid ticket (make sure barcode case is enforced)
       @ticket = Ticket.new(redeemed: nil, barcode: SecureRandom.hex(8).downcase, payment_options_id: 0)
       
@@ -38,6 +41,10 @@ module Api
       if !@ticket[:redeemed]
         @ticket[:price] = PaymentsHelper.calculate_price(@ticket[:created_at].to_datetime, DateTime.now)
       end
+    end
+    
+    def free_spaces
+      @free_spaces = MAX_TICKETS - Ticket.active.count
     end
   end
 end
