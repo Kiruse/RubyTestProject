@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# Seed the payment options
+PaymentOption.create(name: 'Unpaid')
+PaymentOption.create(name: 'Credit Card')
+PaymentOption.create(name: 'Debit Card')
+PaymentOption.create(name: 'Cash')

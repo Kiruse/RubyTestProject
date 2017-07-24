@@ -1,0 +1,23 @@
+<h1>Pay Ticket</h1>
+<table>
+	<tr>
+		<td>Barcode:</td>
+		<td><%= @ticket[:barcode].upcase %></td>
+	</tr>
+	<tr>
+		<td>Price:</td>
+		<td><%= @ticket[:price] %>&euro;</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<%= form_for :payment, url: '/api/tickets/' + @ticket[:barcode] + '/payment', method: 'post' do |f| %>
+				<%= f.select :payment_options_id  do %>
+					<% @paymentOptions.each do |o| %>
+						<%= unless o[:id] == 1 then content_tag(:option, o[:name], value: o[:id]) end %>
+					<% end %>
+				<% end %>
+				<%= f.submit "Pay" %>
+			<% end %>
+		</td>
+	</tr>
+</table>

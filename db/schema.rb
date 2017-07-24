@@ -10,13 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170723175135) do
+ActiveRecord::Schema.define(version: 20170724193148) do
+
+  create_table "payment_options", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "tickets", force: :cascade do |t|
     t.string "barcode"
-    t.date "redeemed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "price"
+    t.integer "payment_options_id"
+    t.datetime "redeemed"
+    t.index ["payment_options_id"], name: "index_tickets_on_payment_options_id"
   end
 
 end
